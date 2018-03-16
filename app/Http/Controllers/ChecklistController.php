@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Checklist;
 
+use Session;
+
 class ChecklistController extends Controller
 {
     public function index()
@@ -23,6 +25,8 @@ class ChecklistController extends Controller
 
     	$checklist->save();
 
+    	Session::flash('Success', 'Your item has been added to the checklist.');
+
     	return redirect()->back();
 
     }
@@ -32,6 +36,8 @@ class ChecklistController extends Controller
     	$checklist = Checklist::find($id);
 
     	$checklist->delete();
+
+    	Session::flash('Success', 'Your item has been deleted from the checklist.');
 
     	return redirect()->back();
     }
@@ -50,6 +56,21 @@ class ChecklistController extends Controller
     	$checklist->checklist = $request->checklist;
 
     	$checklist->save();
+
+    	Session::flash('Success', 'Your item has been updated.');
+
+    	return redirect()->back();
+    }
+
+    public function checked($id)
+    {
+    	$checklist = Checklist::find($id);
+
+    	$checklist->checked = 1;
+
+    	$checklist->save();
+
+    	Session::flash('Success', 'Your item has been checked.');
 
     	return redirect()->back();
     }

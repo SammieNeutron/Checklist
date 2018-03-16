@@ -76,6 +76,13 @@
         </style>
     </head>
     <body>
+
+        @if(Session::has('Success'))
+            <div class="alert alert-success" role="alert">
+            {{  Session::get('Success')  }} <span><i class="fa fa-check" style="font-size:15px;color:green;text-shadow:2px 2px 4px #000000;"></i></span>
+            </div>
+        @endif
+
         <div class="flex-center position-ref full-height">
 
             @yield('content')

@@ -4,7 +4,7 @@
 @section('content')
 
 		<div class="">
-			
+
 			<div class="row">
 		        <div class="col-lg-12">
 		            <form action="/create/checklist" method="post" class="form-group">
@@ -20,9 +20,26 @@
 	    <div>
 			@foreach(  $checklists as $checklist  )
 
-				{{  $checklist->checklist  }} <a href="{{  route('checklist.delete', ['id' => $checklist->id])  }}" class="btn btn-danger btn-sm">Delete item</a>
+				{{  $checklist->checklist  }} 
+				
+				<a href="{{  route('checklist.delete', ['id' => $checklist->id])  }}" class="btn btn-danger btn-sm">Delete item</a>
 
 				<a href="{{  route('checklist.update', ['id' => $checklist->id])  }}" class="btn btn-info btn-sm" data-toggle="modal" data-target="#checklistModal{{$checklist->id}}">Update item</a>
+
+				@if(!$checklist->checked)
+					<!-- <form action="{{route('checklist.checked', ['id' => $checklist->id])}}" method="post">
+						{{csrf_field()}}
+						<input type="checkbox" name="check">Check item
+						
+					</form> -->
+					<a href="{{  route('checklist.checked', ['id' => $checklist->id])  }}" class="btn btn-success btn-sm">Check item</a>
+
+				@else
+
+					<span><i class="fa fa-check" style="font-size:20px;color:green;text-shadow:2px 2px 4px #000000;"></i>&nbsp;Checked!</span>
+
+				@endif
+
 
 				<hr>
 

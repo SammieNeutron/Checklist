@@ -39,3 +39,8 @@ Route::post('/checklist/save/{id}', [
 	'uses' => 'ChecklistController@save',
 	'as' => 'checklist.save'
 ]);
+
+Route::get('/checklist/checked/{id}', [
+	'uses' => 'ChecklistController@checked',
+	'as' => 'checklist.checked'
+]);
